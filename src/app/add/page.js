@@ -1,5 +1,7 @@
 "use client";
+
 import { useState } from "react";
+import { createBook } from "@/app/fetch";
 
 export default function AddBookPage() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -12,7 +14,9 @@ export default function AddBookPage() {
     }
     const formData = new FormData(event.target);
     try {
-      // await createBook(formData);
+      const { title, author, publisher, year } = Object.fromEntries(formData);
+      const image = formData.get("image");
+      await createBook({ title, author, publisher, year, image });
       event.target.reset();
       // Handle success
       setSelectedImage(null);
