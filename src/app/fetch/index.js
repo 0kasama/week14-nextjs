@@ -34,7 +34,7 @@ export const loginUser = async (email, password) => {
 
 export const createBook = async (formData) => {
   try {
-    const response = await fetch(`${BASE_URL}/book`, {
+    const response = await fetch(`${BASE_URL}/books`, {
       method: "POST",
       body: formData,
     });
@@ -47,7 +47,7 @@ export const createBook = async (formData) => {
 
 export const getAllBooks = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/book`);
+    const response = await fetch(`${BASE_URL}/books`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -67,7 +67,7 @@ export const getAllBooks = async () => {
 export const editBook = async (book) => {
   const { id, title, author, publisher, year, pages } = book;
   try {
-    const response = await fetch(`${BASE_URL}/book/${id}`, {
+    const response = await fetch(`${BASE_URL}/books/${id}`, {
       method: "PUT",
       body: JSON.stringify({ title, author, publisher, year, pages }),
       headers: {
@@ -83,7 +83,7 @@ export const editBook = async (book) => {
 
 export const deleteBook = async (id) => {
   try {
-    const response = await fetch(`${BASE_URL}/book/${id}`, {
+    const response = await fetch(`${BASE_URL}/books/${id}`, {
       method: "DELETE",
     });
     const data = await response.json();
@@ -95,7 +95,7 @@ export const deleteBook = async (id) => {
 
 export const getBookDetailById = async (id) => {
   try {
-    const response = await fetch(`${BASE_URL}/book/${id}`);
+    const response = await fetch(`${BASE_URL}/books/${id}`);
     const data = await response.json();
     return data;
   } catch (error) {
